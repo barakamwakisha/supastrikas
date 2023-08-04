@@ -1,0 +1,89 @@
+{
+  "testRunner": {
+    "args": {
+      "$0": "jest",
+      "config": "./jest.config.json"
+    },
+    "jest": {
+      "setupTimeout": 120000
+    }
+  },
+  "apps": {
+    "ios.debug": {
+      "type": "ios.app",
+      "build": "cd ../../apps/supa-mobile/ios && xcodebuild -workspace SupaMobile.xcworkspace -scheme SupaMobile -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -derivedDataPath ./build -quiet",
+      "binaryPath": "../../apps/supa-mobile/ios/build/Build/Products/Debug-iphonesimulator/SupaMobile.app"
+    },
+    "ios.release": {
+      "type": "ios.app",
+      "build": "cd ../../apps/supa-mobile/ios && xcodebuild -workspace SupaMobile.xcworkspace -scheme SupaMobile -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -derivedDataPath ./build -quiet",
+      "binaryPath": "../../apps/supa-mobile/ios/build/Build/Products/Release-iphonesimulator/SupaMobile.app"
+    },
+
+    "ios.local": {
+      "type": "ios.app",
+      "build": "npx nx run supa-mobile:build --platform ios --profile preview --wait --local --no-interactive --output=../../apps/supa-mobile/dist/SupaMobile.tar.gz",
+      "binaryPath": "../../apps/supa-mobile/dist/SupaMobile.app"
+    },
+
+    "android.debug": {
+      "type": "android.apk",
+      "build": "cd ../../apps/supa-mobile/android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug",
+      "binaryPath": "../../apps/supa-mobile/android/app/build/outputs/apk/debug/app-debug.apk"
+    },
+    "android.release": {
+      "type": "android.apk",
+      "build": "cd ../../apps/supa-mobile/android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release",
+      "binaryPath": "../../apps/supa-mobile/android/app/build/outputs/apk/release/app-release.apk"
+    },
+
+    "android.local": {
+      "type": "android.apk",
+      "build": "npx nx run supa-mobile:build --platform android --profile preview --wait --local --no-interactive --output=../../apps/supa-mobile/dist/SupaMobile.apk",
+      "binaryPath": "../../apps/supa-mobile/dist/SupaMobile.apk"
+    }
+  },
+  "devices": {
+    "simulator": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 14"
+      }
+    },
+    "emulator": {
+      "type": "android.emulator",
+      "device": {
+        "avdName": "Pixel_4a_API_30"
+      }
+    }
+  },
+  "configurations": {
+    "ios.sim.release": {
+      "device": "simulator",
+      "app": "ios.release"
+    },
+    "ios.sim.debug": {
+      "device": "simulator",
+      "app": "ios.debug"
+    },
+
+    "ios.sim.local": {
+      "device": "simulator",
+      "app": "ios.local"
+    },
+
+    "android.emu.release": {
+      "device": "emulator",
+      "app": "android.release"
+    },
+    "android.emu.debug": {
+      "device": "emulator",
+      "app": "android.debug"
+    },
+
+    "android.emu.local": {
+      "device": "emulator",
+      "app": "android.local"
+    }
+  }
+}

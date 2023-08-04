@@ -1,0 +1,27 @@
+{
+  "name": "supa-mobile",
+  "version": "0.0.1",
+  "private": true,
+  "main": "expo-router/entry",
+  "dependencies": {
+    "@testing-library/jest-native": "*",
+    "@testing-library/react-native": "*",
+    "metro-config": "*",
+    "react-native": "*",
+    "expo": "*",
+    "react-native-svg": "*",
+    "react-native-web": "*",
+    "@nx/expo": "*",
+    "@expo/metro-config": "*",
+    "expo-router": "*",
+    "@supabase/supabase-js": "*",
+    "react": "*",
+    "@tanstack/react-query": "*",
+    "react-native-url-polyfill": "*",
+    "expo-secure-store": "*"
+  },
+  "scripts": {
+    "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/supa-mobile && cp package-lock.json apps/supa-mobile",
+    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/supa-mobile"
+  }
+}
